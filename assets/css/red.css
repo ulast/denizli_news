@@ -1,0 +1,18 @@
+.cuxhaventimes
+{
+    font-size:3.4em;
+    text-align: center;
+    color: black;
+}
+
+.marquee
+{
+    overflow: hidden;
+    width: 91%;
+    float: right;
+}
+
+.videos .item
+{
+    cursor: pointer;
+}
