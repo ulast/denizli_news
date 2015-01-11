@@ -7,14 +7,21 @@
 
 class News_model extends MY_Model
 {
-    public function detail($news_ID)
+    public function detail($news_ID=NULL, $url=NULL, $category=NULL)
     {
-        $data   =   $this->db
-                    ->select('news.*, categories.title AS category_title')
-                    ->from('news')
-                    ->where('news.news_ID',$news_ID)
-                    ->join('categories','categories.category_ID = news.category')
-                    ->get()->row_array();
+                    $this->db->select('news.*, categories.url AS category_url, categories.title AS category_title');
+                    $this->db->from('news');
+                    if($news_ID == NULL)
+                    {
+                        $this->db->where('news.url',$url);
+                        $this->db->where('categories.url',$category);
+                    }
+                    else
+                    {
+                        $this->db->where('news.news_ID',$news_ID);
+                    }
+                    $this->db->join('categories','categories.category_ID = news.category');
+        $data   =   $this->db->get()->row_array();
 
         return $data;
     }
